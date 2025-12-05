@@ -43,8 +43,12 @@ public class MemberModule {
         String id = s.nextLine();
         System.out.print("Nama: ");
         String name = s.nextLine();
+        System.out.print("Password: ");
+        String pass = s.nextLine();
+        String salt = main.utils.PasswordUtils.generateSalt();
+        String hash = main.utils.PasswordUtils.hash(pass.toCharArray(), salt);
         List<Member> members = FileManager.loadMembers();
-        members.add(new Member(id, name));
+        members.add(new Member(id, name, salt, hash));
         FileManager.saveMembers(members);
         System.out.println("Anggota ditambahkan.");
     }
@@ -59,6 +63,14 @@ public class MemberModule {
         if (found == null) { System.out.println("Anggota tidak ditemukan."); return; }
         System.out.print("Nama baru (enter=tidak berubah): ");
         String name = s.nextLine(); if (!name.isBlank()) found.setName(name);
+        System.out.print("Ubah password? (enter=tidak) ");
+        String p = s.nextLine();
+        if (!p.isBlank()) {
+            String salt = main.utils.PasswordUtils.generateSalt();
+            String hash = main.utils.PasswordUtils.hash(p.toCharArray(), salt);
+            found.setSalt(salt);
+            found.setPasswordHash(hash);
+        }
         FileManager.saveMembers(members);
         System.out.println("Anggota diperbarui.");
     }

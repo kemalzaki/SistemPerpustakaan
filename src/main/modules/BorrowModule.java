@@ -10,12 +10,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class BorrowModule {
-    public void menu() {
+    // if memberId == null -> admin/operator: ask member id interactively
+    // if memberId != null -> act as that member
+    public void menu(String memberId) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("=== PINJAM BUKU ===");
 
-        System.out.print("Masukkan ID Member: :");
-        String memberId = scanner.nextLine();
+        String mid = memberId;
+        if (mid == null) {
+            System.out.print("Masukkan ID Member: :");
+            mid = scanner.nextLine();
+        }
         System.out.print("Masukkan ID Buku: ");
         String bookId = scanner.nextLine();
 
@@ -27,7 +32,7 @@ public class BorrowModule {
         Book foundBook = null;
         
         for (Member m : memberList) {
-            if (m.getId().equals(memberId)) {
+            if (m.getId().equals(mid)) {
                 foundMember = m;
                 break;
             }
@@ -55,7 +60,7 @@ public class BorrowModule {
 
         Transaction trx = new Transaction();
         trx.setId("TRX-" + System.currentTimeMillis());
-        trx.setMemberId(memberId);
+        trx.setMemberId(mid);
         trx.setBookId(bookId);
         trx.setBorrowDate(LocalDate.now().toString());
         trx.setDueDate(LocalDate.now().plusDays(7).toString());

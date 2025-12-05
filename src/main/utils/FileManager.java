@@ -44,7 +44,8 @@ public class FileManager {
         }
     }
 
-    // Members: id|name
+    // Members: id|name|salt|passwordHash
+    // legacy: id|name
     public static List<Member> loadMembers() {
         List<Member> list = new ArrayList<>();
         File file = new File(MEMBER_PATH);
@@ -53,7 +54,10 @@ public class FileManager {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] p = line.split("\\|", -1);
-                if (p.length >= 2) {
+                if (p.length >= 4) {
+                    Member m = new Member(p[0], p[1], p[2], p[3]);
+                    list.add(m);
+                } else if (p.length >= 2) {
                     Member m = new Member(p[0], p[1]);
                     list.add(m);
                 }
@@ -68,7 +72,9 @@ public class FileManager {
         file.getParentFile().mkdirs();
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
             for (Member m : members) {
-                bw.write(String.format("%s|%s", m.getId(), m.getName()));
+                String salt = m.getSalt() == null ? "" : m.getSalt();
+                String hash = m.getPasswordHash() == null ? "" : m.getPasswordHash();
+                bw.write(String.format("%s|%s|%s|%s", m.getId(), m.getName(), salt, hash));
                 bw.newLine();
             }
         } catch (IOException ignored) {
