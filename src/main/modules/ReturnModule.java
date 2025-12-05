@@ -29,10 +29,20 @@ public class ReturnModule {
             }
         }
 
-        System.out.print("Masukkan ID Transaksi yang akan dikembalikan: ");
-        String tid = s.nextLine();
+        System.out.print("Masukkan ID Transaksi (atau masukkan ID Buku untuk mencari): ");
+        String inputId = s.nextLine();
         Transaction found = null;
-        for (Transaction t : transactions) if (t.getId().equals(tid)) { found = t; break; }
+        for (Transaction t : transactions) if (t.getId().equals(inputId)) { found = t; break; }
+
+        // fallback: if not found, try search by bookId (first BORROWED match)
+        if (found == null) {
+            for (Transaction t : transactions) {
+                if ("BORROWED".equals(t.getStatus()) && t.getBookId().equals(inputId)) {
+                    if (memberId == null || memberId.equals(t.getMemberId())) { found = t; break; }
+                }
+            }
+        }
+
         if (found == null) { System.out.println("Transaksi tidak ditemukan."); return; }
         if (memberId != null && !memberId.equals(found.getMemberId())) { System.out.println("Anda hanya dapat mengembalikan transaksi milik Anda sendiri."); return; }
 
