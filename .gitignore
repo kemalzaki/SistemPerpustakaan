@@ -1,0 +1,10 @@
+out/
+*.class
+.DS_Store
+/.idea/
+/.vscode/
+target/
+*.log
+node_modules/
+bin/
+*.iml
