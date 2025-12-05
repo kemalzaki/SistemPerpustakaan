@@ -1,0 +1,30 @@
+[
+  {
+    "id": "B001",
+    "title": "Algoritma dan Struktur Data",
+    "author": "Rinaldi Munir",
+    "category": "Teknologi",
+    "stock": 5
+  },
+  {
+    "id": "B002",
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "category": "Teknologi",
+    "stock": 3
+  },
+  {
+    "id": "B003",
+    "title": "Laskar Pelangi",
+    "author": "Andrea Hirata",
+    "category": "Fiksi",
+    "stock": 2
+  },
+  {
+    "id": "B004",
+    "title": "Sejarah Dunia yang Disembunyikan",
+    "author": "Jonathan Black",
+    "category": "Sejarah",
+    "stock": 4
+  }
+]

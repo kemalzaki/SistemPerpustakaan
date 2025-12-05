@@ -2,9 +2,9 @@ package main.utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import main.data.models.Book;
-import main.data.models.Member;
-import main.data.models.Transaction;
+import main.models.Book;
+import main.models.Member;
+import main.models.Transaction;
 
 import java.io.File;
 import java.io.IOException;
