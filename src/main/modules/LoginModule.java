@@ -12,7 +12,7 @@ public class LoginModule {
 
     public LoginResult login() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Username: ");
+        System.out.print("Username (ID atau Nama): ");
         String user = input.nextLine();
         System.out.print("Password: ");
         String pass = input.nextLine();
@@ -22,10 +22,11 @@ public class LoginModule {
             return new LoginResult("ADMIN", null);
         }
 
-        // try member login by id and password
+        // try member login by id or name and password
         List<Member> members = FileManager.loadMembers();
         for (Member m : members) {
-            if (m.getId().equals(user)) {
+            // check by id or by name
+            if (m.getId().equals(user) || m.getName().equals(user)) {
                 String salt = m.getSalt();
                 String hash = m.getPasswordHash();
                 if (salt != null && !salt.isBlank() && hash != null && !hash.isBlank()) {

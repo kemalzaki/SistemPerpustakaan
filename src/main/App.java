@@ -64,7 +64,7 @@ public class App {
                     case 1 -> bookModule.showBooks();
                     case 2 -> borrowModule.menu(memberId);
                     case 3 -> returnModule.menu(memberId);
-                    case 4 -> reportModule.menu();
+                    case 4 -> reportModule.menu(memberId);
                 }
             } while (choice != 0);
         }

@@ -108,7 +108,11 @@ public class ReturnModule {
 
         // Validasi Kepemilikan (Khusus Member)
         if (memberId != null && !found.getMemberId().equals(memberId)) {
+<<<<<<< HEAD
             System.out.println("Anda hanya dapat mengembalikan transaksi milik Anda sendiri.");
+=======
+            System.out.println("[X] Anda hanya dapat mengembalikan transaksi milik Anda sendiri.");
+>>>>>>> 82112bb653ddd2d9f8f480eb233e5bace235345c
             return;
         }
 
@@ -154,7 +158,11 @@ public class ReturnModule {
         
         if (!confirm.equalsIgnoreCase("y")) {
             System.out.println("Proses dibatalkan.");
+<<<<<<< HEAD
             return; 
+=======
+            return;
+>>>>>>> 82112bb653ddd2d9f8f480eb233e5bace235345c
         }
 
         // 6. EKSEKUSI (UPDATE DATA & SAVE)
