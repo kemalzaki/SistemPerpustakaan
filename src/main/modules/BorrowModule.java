@@ -18,7 +18,7 @@ public class BorrowModule {
 
         String mid = memberId;
         if (mid == null) {
-            System.out.print("Masukkan ID Member: :");
+            System.out.print("Masukkan ID Member: ");
             mid = scanner.nextLine();
         }
         System.out.print("Masukkan ID Buku: ");
